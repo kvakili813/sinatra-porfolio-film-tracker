@@ -31,5 +31,17 @@ class UsersController < ApplicationController
     end
   end
 
+  post '/login' do
+    @user = User.find_by_username(params[:username].downcase)
+
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect '/'
+    else
+      flash[:message] = 'Incorrect Username or Password!'
+      redirect '/login'
+    end
+
+  end
 
 end
