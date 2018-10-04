@@ -8,4 +8,6 @@ class FilmsController < ApplicationController
     end
   end
 
-  
+  post '/films' do
+    if logged_in?
+      @genre = Genre.create(name: params[:new_film][:genre])
