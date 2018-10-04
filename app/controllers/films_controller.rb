@@ -34,4 +34,31 @@ class FilmsController < ApplicationController
         else
           erb :'films/show'
         end
-      end 
+      end
+
+    get '/films/:id/edit'
+      if logged_in?
+        verify_and_process_film(params[:id]) do
+          erb :'films/edit'
+        end
+      else
+        redirect '/login'
+      end
+    end
+
+    patch '/films/:id' do
+      if logged_in?
+        verify_and_process_film(params[:id]) do
+          if @film.update(params[:edit_film])
+            redirect "/films/#{@film.id}"
+          else
+            flash[:message] = 'Fill correct info!'
+            redirect "/films/#{@film.id}/edit"
+          end
+        end
+      else
+        redirect '/login'
+      end
+    end
+
+  
