@@ -13,4 +13,5 @@ gem 'sqlite3'
 gem 'rack-flash3', require: 'rack-flash'
 gem 'sinatra-contrib', require: false
 gem 'bcrypt'
+gem 'shotgun'
 gem 'pry'
