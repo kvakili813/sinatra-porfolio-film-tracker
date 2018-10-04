@@ -14,4 +14,17 @@ class FilmsController < ApplicationController
       @film = Film.new
       @film.title = params[:new_film][:title]
       @film.year = params[:new_film][:year]
-      @film.
+      @film.genre_id = @genre.id
+      @film.user_id = session[:user_id]
+        if @film.save
+          redirect "films/#{@film.id}"
+        else
+          flash[:message] = 'Fill correct info!'
+          redirect '/films/new'
+        end
+      else
+        redirect '/login'
+      end
+    end
+
+    
