@@ -15,3 +15,4 @@ gem 'sinatra-contrib', require: false
 gem 'bcrypt'
 gem 'shotgun'
 gem 'pry'
+gem 'rake'
