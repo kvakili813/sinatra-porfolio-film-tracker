@@ -61,4 +61,15 @@ class FilmsController < ApplicationController
       end
     end
 
-  
+    delete '/films/:id'
+      if logged_in?
+        verify_and_process_film(params[:id]) do
+          @film.destroy
+          redirect "/users/#{current_user.username}"
+        end
+      else
+        redirect '/login'
+      end
+    end
+
+  end 
