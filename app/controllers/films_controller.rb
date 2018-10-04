@@ -27,4 +27,11 @@ class FilmsController < ApplicationController
       end
     end
 
-    
+    get '/films/:id' do
+      @film = Film.find_by_id(params[:id])
+        if @film.nil?
+          redirect '/'
+        else
+          erb :'films/show'
+        end
+      end 
