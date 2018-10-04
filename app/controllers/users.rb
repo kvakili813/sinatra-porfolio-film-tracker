@@ -44,4 +44,22 @@ class UsersController < ApplicationController
 
   end
 
+  get '/users/:username' do
+    @user = User.find_by_username(params[:username])
+    if @user.nil?
+      redirect '/'
+    else
+      erb :'users/show'
+    end
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect '/'
+    else
+      redirect '/login'
+    end
+  end
+
 end
