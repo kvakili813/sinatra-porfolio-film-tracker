@@ -1,0 +1,20 @@
+<nav>
+  <a href="/">Home</a>
+  <a href="/films/new">Post Film</a>
+  <a href="/users/<%= current_user.username %>">Your Film's</a>
+</nav>
+
+<h2>Edit Film</h2>
+
+<form action="/films/<%= @film.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <input type="text" name="edit_film[title]" id="title" placeholder="Enter Film Title"><br>
+  <input type="number" name="edit_film[year]" id="year" placeholder="Enter Film Year"><br>
+  <input type="text" name="edit_film[genre]" id="genre" placeholder="Enter Film Genre"><br>
+  <select name="edit_film[genre_id]" id="genre">
+    <% Genre.all.each do |genre| %>
+        <option value="<%= genre.id %>"><%= genre.name %></option>
+    <% end %>
+  </select><br>
+  <button type="submit">Edit Film</button>
+</form>
