@@ -1,0 +1,12 @@
+
+
+<% Film.all.each do |film| %>
+
+    <div class="film">
+      <p>Film entered by: <a href="/users/<%= film.user.username %>"><%= film.user.username %></a></p>
+      <p>Film Title: <%= film.title %></p>
+      <p>Film Year: <%= film.year %></p>
+      <p>Film Genre: <a href="/genres/<%= film.genre.name %>"><%= film.genre.name %></a></p>
+      <p><a href="/films/<%= film.id %>">View film</a></p>
+    </div>
+<% end %>
