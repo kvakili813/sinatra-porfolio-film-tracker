@@ -5,3 +5,7 @@ require_relative './config/environment'
 # end
 
 use Rack::MethodOverride
+use UsersController
+use FilmsController
+use GenresController
+run ApplicationController
