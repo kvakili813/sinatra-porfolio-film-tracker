@@ -1,0 +1,13 @@
+<nav>
+  <a href="/">Home</a>
+  <a href="/films/new" id="current">Post Film</a>
+  <a href="/users/<%= current_user.username %>">Your Film's</a>
+</nav>
+<h2>Post Film</h2>
+
+<form action="/films" method="post">
+  <input type="text" name="new_film[title]" id="title" placeholder="Enter Film Title"><br>
+  <input type="number" name="new_film[year]" id="year" placeholder="Enter Film Year"><br>
+  <input type="text" name="new_film[genre]" id="genre" placeholder="Enter Film Genre"><br>
+  <button type="submit">Post Film</button>
+</form>
