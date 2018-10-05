@@ -6,3 +6,15 @@
       <p>Film Title: <%= film.title %></p>
       <p>Film Year: <%= film.year %></p>
       <p>Film Genre: <a href="/genres/<%= film.genre.name %>"><%= film.genre.name %></a></p>
+      <p><a href="/films/<%= film.id %>">View film</a></p>
+           <% if @user.id == current_user.id %>
+               <p><a href="/films/<%= film.id %>/edit">Edit</a></p>
+               <form action="/films/<%= film.id %>" method="post">
+                 <input type="hidden" name="_method" value="delete">
+                 <p>
+                   <button type="submit">Delete</button>
+                 </p>
+               </form>
+           <% end %>
+         </div>
+     <% end %>
