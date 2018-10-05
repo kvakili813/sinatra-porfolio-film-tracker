@@ -1,3 +1,14 @@
+<nav>
+  <a href="/">Home</a>
+  <% if logged_in? %>
+      <a href="/films/new">Post Film</a>
+      <a href="/users/<%= current_user.username %>" <%= "id='current'" if @user.id == current_user.id %>>Your Film's</a>
+  <% else logged_in? %>
+      <a href="/signup">SignUp</a>
+      <a href="/login">Login</a>
+  <% end %>
+</nav>
+
 <h2>Viewing <%= @user.username %> Film's</h2>
 
 <% @user.films.all.each do |film| %>
