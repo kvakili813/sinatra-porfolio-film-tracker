@@ -23,7 +23,7 @@ class ApplicationController < Sinatra::Base
     end
 
      def current_user
-      @current_user ||= User.find_by_id(id: session[:user_id])
+      @current_user ||= User.find_by_id(session[:user_id])
     end
 
     def verify_and_process_film(id)
@@ -41,4 +41,4 @@ class ApplicationController < Sinatra::Base
 
     end
 
-  end 
+  end

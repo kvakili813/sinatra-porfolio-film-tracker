@@ -1,4 +1,4 @@
-class Genre < ActiveRecord::Base
+class User < ActiveRecord::Base
   has_many :films
   has_secure_password
   validates_presence_of :username

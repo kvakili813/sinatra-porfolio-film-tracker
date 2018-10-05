@@ -36,7 +36,7 @@ class FilmsController < ApplicationController
         end
       end
 
-    get '/films/:id/edit' do 
+    get '/films/:id/edit' do
       if logged_in?
         verify_and_process_film(params[:id]) do
           erb :'films/edit'
@@ -49,7 +49,11 @@ class FilmsController < ApplicationController
     patch '/films/:id' do
       if logged_in?
         verify_and_process_film(params[:id]) do
-          if @film.update(params[:edit_film])
+          film_title = params[:edit_film][:title]
+          film_year = params[:edit_film][:year]
+          film_genre = Genre.find_or_create_by(name: params[:edit_film][:genre])
+
+          if @film.update(title: film_title, year: film_year, genre_id: film_genre.id)
             redirect "/films/#{@film.id}"
           else
             flash[:message] = 'Fill correct info!'
