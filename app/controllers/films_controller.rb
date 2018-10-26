@@ -1,19 +1,23 @@
 class FilmsController < ApplicationController
 
   get '/films/new' do
-    if logged_in?
+    redirect_if_not_logged_in
       erb :'films/new'
-    else
-      redirect to '/login'
-    end
   end
 
   post '/films' do
-    if logged_in?
-      @genre = Genre.create(name: params[:new_film][:genre])
+    redirect_if_not_logged_in
+      if params[:genre] != ""
+        @genre = Genre.find_or_create_by(name: params[:genre])
+      elsif
+        @genre = Genre.find_by(id: params[:genre_id])
+      else
+        flash[:message] = 'Fill correct info!'
+        redirect '/films/new'
+      end
       @film = Film.new
-      @film.title = params[:new_film][:title]
-      @film.year = params[:new_film][:year]
+      @film.title = params[:title]
+      @film.year = params[:year]
       @film.genre_id = @genre.id
       @film.user_id = session[:user_id]
         if @film.save
@@ -22,9 +26,6 @@ class FilmsController < ApplicationController
           flash[:message] = 'Fill correct info!'
           redirect '/films/new'
         end
-      else
-        redirect '/login'
-      end
     end
 
     get '/films/:id' do
@@ -49,11 +50,16 @@ class FilmsController < ApplicationController
     patch '/films/:id' do
       if logged_in?
         verify_and_process_film(params[:id]) do
-          film_title = params[:edit_film][:title]
-          film_year = params[:edit_film][:year]
-          film_genre = Genre.find_or_create_by(name: params[:edit_film][:genre])
+          if params[:genre] != ""
+            @genre = Genre.find_or_create_by(name: params[:genre])
+          else
+            @genre = Genre.find_by(id: params[:genre_id])
+          end
+          film_title = params[:title]
+          film_year = params[:year]
+          film_genre_id = Genre.find_by(id: params[:genre_id])
 
-          if @film.update(title: film_title, year: film_year, genre_id: film_genre.id)
+          if @film.update(title: film_title, year: film_year, genre_id: film_genre_id.id)
             redirect "/films/#{@film.id}"
           else
             flash[:message] = 'Fill correct info!'

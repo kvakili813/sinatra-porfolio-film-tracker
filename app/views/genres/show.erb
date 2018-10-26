@@ -10,7 +10,6 @@
 </nav>
 
 <h2>Viewing <%= @genre.name %> Films's</h2>
-
 <% @genre.films.all.each do |film| %>
     <div class="film">
       <p>Film entered by: <a href="/users/<%= film.user.username %>"><%= film.user.username %></a></p>

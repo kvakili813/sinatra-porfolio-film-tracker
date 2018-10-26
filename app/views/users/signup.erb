@@ -4,6 +4,9 @@
   <a href="/login">Login</a>
 </nav>
 <h2>SignUp</h2>
+<% if flash[:message] %>
+      <%= flash[:message] %>
+  <% end %>
 
 <form action="/signup" method="post">
   <input type="text" name="username" id="username" placeholder="Enter Username"><br>

@@ -3,7 +3,7 @@
   <% if logged_in? %>
       <a href="/films/new">Post Film</a>
       <a href="/users/<%= current_user.username %>">Your Film's</a>
-<% else logged_in? %>
+<% else %>
       <a href="/signup">SignUp</a>
       <a href="/login">Login</a>
   <% end %>

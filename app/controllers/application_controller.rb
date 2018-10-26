@@ -3,6 +3,7 @@ class ApplicationController < Sinatra::Base
 
   configure :development do
     register Sinatra::Reloader
+    register Sinatra::Flash
   end
 
   configure do
@@ -12,11 +13,19 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
+
   get '/' do
     erb :index
   end
 
   helpers do
+#redirect to /login not logged_in
+#
+    def redirect_if_not_logged_in # start here
+      if !logged_in?
+        redirect '/login'
+      end
+    end
 
      def logged_in?
       !!session[:user_id]

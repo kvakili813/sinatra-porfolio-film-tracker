@@ -4,15 +4,17 @@
   <a href="/users/<%= current_user.username %>">Your Film's</a>
 </nav>
 <h2>Post Film</h2>
-
+<% if flash[:message] %>
+      <%= flash[:message] %>
+  <% end %>
 <form action="/films" method="post">
-  <input type="text" name="new_film[title]" id="title" placeholder="Enter Film Title"><br>
-  <input type="number" name="new_film[year]" id="year" placeholder="Enter Film Year"><br>
-  <input type="text" name="new_film[genre]" id="genre" placeholder="Enter Film Genre">
-  <select name="new_film[genre_id]" id="genre">
-    <% Genre.all.each do |genre| %>
-        <option value="<%= genre.id %>"><%= genre.name %></option>
-    <% end %>
-  </select><br>
+  <input type="text" name="title" id="title" placeholder="Enter Film Title"><br>
+  <input type="number" name="year" id="year" placeholder="Enter Film Year"><br>
+  <input type="text" name="genre" id="genre" placeholder="Enter Film Genre"><br>
+  <select name="genre_id" id="genre">
+   <% Genre.all.each do |genre| %>
+       <option value="<%= genre.id %>"><%= genre.name %></option>
+   <% end %>
+ </select><br>
   <button type="submit">Post Film</button>
 </form>
